@@ -5,8 +5,9 @@ const { User } = require("../../models/user");
 
 const { HttpError, ctrlWrapper } = require("../../helpers");
 
+const { PORT } = process.env;
 // const { SECRET_KEY } = process.env;
-const SECRET_KEY = "4rui8*)4#\-kxl4";
+// const SECRET_KEY = "4rui8*)4#\-kxl4";
 
 
 const register = async(req, res) => {
@@ -43,7 +44,7 @@ const login = async (req, res)  => {
 		id: user._id,
 	}
 
-	const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
+	const token = jwt.sign(payload, PORT, {expiresIn: "23h"});
 
 	res.json({
 		token,
