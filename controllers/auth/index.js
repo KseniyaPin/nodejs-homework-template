@@ -5,10 +5,7 @@ const { User } = require("../../models/user");
 
 const { HttpError, ctrlWrapper } = require("../../helpers");
 
-const { PORT } = process.env;
-// const { SECRET_KEY } = process.env;
-// const SECRET_KEY = "4rui8*)4#\-kxl4";
-
+const { SECRET_KEY } = process.env;
 
 const register = async(req, res) => {
   const { email, password } = req.body;
@@ -16,7 +13,6 @@ const register = async(req, res) => {
 
   if (user) {
 	throw HttpError(409, "Email in use");
-
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
@@ -44,7 +40,7 @@ const login = async (req, res)  => {
 		id: user._id,
 	}
 
-	const token = jwt.sign(payload, PORT, {expiresIn: "23h"});
+	const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
 	await User.findByIdAndUpdate(user._id, {token});
 
 
