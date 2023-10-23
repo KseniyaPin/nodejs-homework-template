@@ -7,8 +7,8 @@ const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const { SECRET_KEY } = process.env;
 
-const register = async(req, res) => {
-  const { email, password } = req.body;
+const register = async (req, res) => {
+    const { email, password } = req.body;
   const user = await User.findOne({ email });
 
   if (user) {
@@ -41,15 +41,14 @@ const login = async (req, res)  => {
 	}
 
 	const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
+	
 	await User.findByIdAndUpdate(user._id, {token});
-
-
 	res.json({
 		token,
 	})
 };
 
-const getCurrent = async(req, res) => {
+const getCurrent = async (req, res) => {
 	const {email, name} = req.user;
 
 	res.json({
@@ -63,7 +62,7 @@ const logout = async (req, res) => {
 	await User.findByIdAndUpdate( _id, {token: ""});
 	
 	res.json({
-		message: "Logaut success",
+		message: "Logout success",
 	})
 }
 
