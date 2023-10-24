@@ -37,11 +37,12 @@ const contactSchema = new Schema ({
     favorite: Joi.boolean(),
   });
   
-  const Contact = model("contact", contactSchema);
-
   const updateFavoriteSchema = Joi.object({
 	favorite: Joi.boolean().required(),
   })
+  
+  const Contact = model("contact", contactSchema);
+
 
   const schemas = {
 	addSchema,
