@@ -5,8 +5,8 @@ const listContacts = async (req, res) => {
 	const {page = 1, limit = 10} = req.query;
 	const skip = (page - 1) * limit;
 
-	const result = await Contact.find({ owner}, {skip, limit}).populate("owner", "name email");
-	res.json(result);
+	const result = await Contact.find({ owner}, "-createAt -updateAt", {skip, limit}).populate("owner", "email");
+	res.json({result, query: result.length });
 };
 
 module.exports = listContacts;
