@@ -7,6 +7,7 @@ const updateAvatar = require("./updateAvatar");
 const {  ctrlWrapper } = require("../../helpers");
 
 
+
 module.exports = {
 	register: ctrlWrapper(register),
 	login: ctrlWrapper(login),
